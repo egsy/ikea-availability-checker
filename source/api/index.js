@@ -20,13 +20,26 @@ module.exports = {
    * @throws AssertionError when the store wasn’t found
    * @returns {Promise<import('./lib/iows2').ProductAvailability>}
    *   resulting product availability
-   */
+    */
+//    availability: async (buCode, productId) => {
+//     const store = stores.findOneById(process.env.buCodeEU);
+//     assert.ok(store, `Unable to find a store with the given buCode: ${buCode}.`);
+//     const iows = new IOWS2(store.countryCode);
+//     return iows.getStoreProductAvailability(process.env.buCodeEU, process.env.productID);
   availability: async (buCode, productId) => {
     const store = stores.findOneById(buCode);
     assert.ok(store, `Unable to find a store with the given buCode: ${buCode}.`);
     const iows = new IOWS2(store.countryCode);
-    return iows.getStoreProductAvailability(buCode, productId)
+        return iows.getStoreProductAvailability(buCode, productId);
   },
   stores,
   errors,
 };
+
+module.exports = (req, res) => {
+    res.json({
+      body: req.body,
+      query: req.query,
+      cookies: req.cookies,
+    })
+  };
