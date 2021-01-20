@@ -22,10 +22,10 @@ module.exports = {
    *   resulting product availability
    */
   availability: async (buCode, productId) => {
-    const store = stores.findOneById(process.env.buCodeEU);
+    const store = stores.findOneById(buCode);
     assert.ok(store, `Unable to find a store with the given buCode: ${buCode}.`);
     const iows = new IOWS2(store.countryCode);
-    return iows.getStoreProductAvailability(process.env.buCodeEU, process.env.productID);
+    return iows.getStoreProductAvailability(buCode, productId)
   },
   stores,
   errors,
